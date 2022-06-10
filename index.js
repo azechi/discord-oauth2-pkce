@@ -2,7 +2,7 @@ const DISCORD_CLIENT_ID = "984687289764556820";
 
 const STORAGE_KEY = "code_verifier";
 const storage = window.sessionStorage;
-const { searchParams: params, origin } = new URL(window.location);
+const { searchParams: params, origin, pathname } = new URL(window.location);
 
 const loaded = new Promise((result) => {
   if (document.readyState === "loading") {
@@ -17,7 +17,7 @@ if (params.has("code")) {
     method: "POST",
     body: new URLSearchParams({
       client_id: DISCORD_CLIENT_ID,
-      redirect_uri: `${origin}/`,
+      redirect_uri: `${origin}${pathname}`,
       grant_type: "authorization_code",
       scope: "identify",
       code_verifier: storage.getItem(STORAGE_KEY),
@@ -65,7 +65,7 @@ async function loginWithRedirect() {
 
   const p = new URLSearchParams({
     client_id: DISCORD_CLIENT_ID,
-    redirect_uri: `${origin}/`,
+    redirect_uri: `${origin}${pathname}`,
     response_type: "code",
     scope: "identify",
     code_challenge: code_challenge,

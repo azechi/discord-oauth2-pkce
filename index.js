@@ -6,7 +6,7 @@ const { searchParams: params, origin, pathname } = new URL(window.location);
 
 const loaded = new Promise((resolve) => {
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", result, { once: true });
+    document.addEventListener("DOMContentLoaded", resolve, { once: true });
   } else {
     resolve();
   }

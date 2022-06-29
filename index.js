@@ -4,11 +4,11 @@ const STORAGE_KEY = "code_verifier";
 const storage = window.sessionStorage;
 const { searchParams: params, origin, pathname } = new URL(window.location);
 
-const loaded = new Promise((result) => {
+const loaded = new Promise((resolve) => {
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", result, { once: true });
   } else {
-    result();
+    resolve();
   }
 });
 
